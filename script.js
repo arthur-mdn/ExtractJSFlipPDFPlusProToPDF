@@ -1,16 +1,51 @@
 // Script d'extraction BookPreview/FlipPDFPlusPro vers PDF
 // À exécuter dans la console du navigateur
 
+const debug = false;
+
 (async function() {
     console.log('Starting extraction...');
-    
-    const baseUrl = 'https://magazine.psynapse.fr/m32/files/page/';
+
+    // URL auto-detection
+    const resources = performance.getEntriesByType('resource');
+
+    if(debug) console.log(resources);
+
+    const pageRequests = resources.filter(r =>
+        r.initiatorType.includes('img') &&
+        r.name.includes('/page/') &&
+        (r.name.includes('.jpg') || r.name.endsWith('.png') || r.name.endsWith('.jpeg'))
+    );
+
+    if(debug) console.log(pageRequests);
+
+    if (pageRequests.length === 0) {
+        console.error('❌ No page images found, please check the URL or the site structure.');
+        return;
+    }
+
+    // Extract base URL and format
+    const firstPageUrl = pageRequests[0].name;
+    const match = firstPageUrl.match(/(.*\/page\/)(\d+)\.(jpg|png)/);
+
+    if (!match) {
+        console.error('❌ Could not parse the page URL format.');
+        return;
+    }
+
+    const baseUrl = match[1];
+    const extension = match[3];
+    const queryString = firstPageUrl.includes('?') ? firstPageUrl.split('?')[1] : '';
+
+    console.log(`Base URL detected: ${baseUrl}*.<${extension}>?${queryString}`);
+
     const maxTotalPages = 200;
     const delayBetweenDownloads = 500;
-    
+    const fixedTimestamp = Date.now();
+
     async function downloadImage(pageNum) {
         try {
-            const url = `${baseUrl}${pageNum}.jpg?2025-10-06165714`;
+            const url = `${baseUrl}${pageNum}.${extension}` + (queryString ? `?${queryString}` : `?t=${fixedTimestamp}`);
             const response = await fetch(url);
             if (!response.ok) {
                 console.log(`❌ Page ${pageNum} not found (status: ${response.status})`);
