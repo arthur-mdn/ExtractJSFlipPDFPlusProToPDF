@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile.dev
     command: npm run dev -- --host --port 5173
     environment:
-      - VITE_API_URL=http://localhost:3001
+      - VITE_API_URL=${VITE_API_URL}
     volumes:
       - ./client:/app
       - licensing_client_node_modules:/app/node_modules
@@ -29,6 +29,7 @@ services:
       - MONGO_URL=mongodb://licensing-mongo:27017/licensesdb
       - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
       - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - STRIPE_API_VERSION=${STRIPE_API_VERSION}
     volumes:
       - ./server:/app
       - licensing_server_node_modules:/app/node_modules

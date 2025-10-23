@@ -15,14 +15,15 @@ const {
     MONGO_URL = "mongodb://localhost:27017/licensesdb",
     STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET,
+    STRIPE_API_VERSION
 } = process.env;
 
-if (!STRIPE_SECRET_KEY || !STRIPE_WEBHOOK_SECRET) {
-    console.error("Configure STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET in .env");
+if (!STRIPE_SECRET_KEY || !STRIPE_WEBHOOK_SECRET || !STRIPE_API_VERSION) {
+    console.error("Configure STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, STRIPE_API_VERSION in .env");
     process.exit(1);
 }
 
-const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2024-06-20" });
+const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: STRIPE_API_VERSION });
 
 const app = express();
 

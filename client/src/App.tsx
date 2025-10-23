@@ -8,7 +8,6 @@ export default function App() {
 
     return (
         <div style={{ maxWidth: 720, margin: "32px auto", fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, sans-serif" }}>
-            <h1>Ma Super Extension</h1>
             {pathname === "/success" ? (
                 <Success />
             ) : pathname === "/cancel" ? (
