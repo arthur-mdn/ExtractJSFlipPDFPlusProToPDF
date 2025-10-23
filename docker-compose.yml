@@ -1,0 +1,54 @@
+services:
+  licensing-client:
+    container_name: licensing-client
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    command: npm run dev -- --host --port 5173
+    environment:
+      - VITE_API_URL=http://localhost:3001
+    volumes:
+      - ./client:/app
+      - licensing_client_node_modules:/app/node_modules
+    ports:
+      - "5173:5173"
+    restart: unless-stopped
+    depends_on:
+      - licensing-server
+
+  licensing-server:
+    container_name: licensing-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    command: npm run dev
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - APP_URL=http://localhost:5173
+      - MONGO_URL=mongodb://licensing-mongo:27017/licensesdb
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+    volumes:
+      - ./server:/app
+      - licensing_server_node_modules:/app/node_modules
+    ports:
+      - "3001:3001"
+    depends_on:
+      - licensing-mongo
+
+  licensing-mongo:
+    container_name: licensing-mongo
+    image: mongo:latest
+    volumes:
+      - licensing_mongo_data:/data/db
+      - ./mongo/mongod.conf:/etc/mongo/mongod.conf:ro
+    command: ["mongod", "--config", "/etc/mongo/mongod.conf"]
+    ports:
+      - "27018:27017"
+    restart: unless-stopped
+
+volumes:
+  licensing_client_node_modules:
+  licensing_server_node_modules:
+  licensing_mongo_data:
