@@ -3,12 +3,14 @@ import { listProducts, createCheckoutSession } from "../api";
 
 export default function Catalog() {
     const [items, setItems] = useState<Array<{ _id: string; name: string }>>([]);
+    const [loading, setLoading] = useState(true);
     const [loadingId, setLoadingId] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         listProducts()
-            .then(d => setItems(d.items))
+            .then(d => setItems(d.items) )
+            .finally(() => setLoading(false))
             .catch(() => setError("Impossible de charger les produits"));
     }, []);
 
@@ -26,7 +28,9 @@ export default function Catalog() {
     };
 
     if (error) return <p style={{color:"crimson"}}>{error}</p>;
-    if (!items.length) return <p>Chargement des produits…</p>;
+    if (loading) return <p>Chargement des produits…</p>;
+
+    if (items.length === 0) return <p>Aucun produit disponible.</p>;
 
     return (
         <div>
