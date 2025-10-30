@@ -1,17 +1,18 @@
 services:
-  licensing-client:
-    container_name: licensing-client
+  licensing-vitrine:
+    container_name: licensing-vitrine
     build:
-      context: ./client
+      context: ./vitrine
       dockerfile: Dockerfile.dev
-    command: npm run dev -- --host --port 5173
     environment:
-      - VITE_API_URL=${VITE_API_URL}
+      - APP_URL=${APP_URL}
+      - NEXT_API_URL=${API_URL}
+      - NEXT_PUBLIC_API_URL=${API_URL}
     volumes:
-      - ./client:/app
-      - licensing_client_node_modules:/app/node_modules
+      - ./vitrine:/app
+      - licensing_vitrine_node_modules:/app/node_modules
     ports:
-      - "5173:5173"
+      - "3000:3000"
     restart: unless-stopped
     depends_on:
       - licensing-server
@@ -25,8 +26,9 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3001
-      - APP_URL=http://localhost:5173
-      - MONGO_URL=mongodb://licensing-mongo:27017/licensesdb
+      - APP_URL=${APP_URL}
+      - MONGO_URL=${MONGO_URL}
+      - JWT_SECRET=${JWT_SECRET}
       - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
       - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
       - STRIPE_API_VERSION=${STRIPE_API_VERSION}
@@ -50,6 +52,6 @@ services:
     restart: unless-stopped
 
 volumes:
-  licensing_client_node_modules:
+  licensing_vitrine_node_modules:
   licensing_server_node_modules:
   licensing_mongo_data:

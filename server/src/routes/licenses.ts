@@ -6,6 +6,7 @@ const router = Router();
 
 router.get("/by-session/:sessionId", async (req, res) => {
     const { sessionId } = req.params;
+    console.log("Fetching license for session ID:", sessionId);
     const lic = await Licenses.findOne({ stripeCheckoutSessionId: sessionId });
     if (!lic) return res.status(404).json({ ok: false });
 

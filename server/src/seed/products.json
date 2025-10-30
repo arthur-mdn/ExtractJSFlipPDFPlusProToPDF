@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "extract_js_flipbook_to_pdf",
+    "name": "Extract JS FlipBook to PDF (lifetime)",
+    "stripePriceId": "price_1SLMyxJAnYGuyFY2kmRgAVUg",
+    "maxActivationsDefault": 1,
+    "active": true,
+    "metadata": {},
+    "createdAt": "2025-10-28T00:00:00.000Z"
+  }
+]

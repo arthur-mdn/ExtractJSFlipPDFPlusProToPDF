@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "product_name",
+    "name": "Product Name",
+    "stripePriceId": "price_stripeID",
+    "maxActivationsDefault": 1,
+    "active": true,
+    "metadata": {},
+    "createdAt": "2025-10-28T00:00:00.000Z"
+  }
+]
