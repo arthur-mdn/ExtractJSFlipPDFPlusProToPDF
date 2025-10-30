@@ -32,7 +32,8 @@ export default async function ProductPage({ params }: Props) {
         console.log(product)
 
         return (
-            <main>
+            <main className={"product-page"}>
+                <img src={`${process.env.NEXT_PUBLIC_API_URL}/images/${product._id}.png`} className={"product-image"} />
                 <h1>{product.name}</h1>
                 <p>{product.metadata.description}</p>
                 <p>Prix</p>

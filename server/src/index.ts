@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import path from "path";
 import Stripe from "stripe";
 import { connectDB } from "./db.js";
 import productsRoutes from "./routes/products.js";
@@ -10,9 +11,9 @@ import webhookRoutes from "./routes/webhooks.js";
 import licensesRoutes from "./routes/licenses.js";
 
 const {
-    PORT = "3001",
-    APP_URL = "http://localhost:5173",
-    MONGO_URL = "mongodb://localhost:27017/licensesdb",
+    PORT,
+    APP_URL,
+    MONGO_URL,
     STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET,
     STRIPE_API_VERSION
@@ -26,6 +27,19 @@ if (!STRIPE_SECRET_KEY || !STRIPE_WEBHOOK_SECRET || !STRIPE_API_VERSION) {
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: STRIPE_API_VERSION });
 
 const app = express();
+const publicDir = path.join(process.cwd(), "public");
+
+app.use(
+    "/images",
+    express.static(publicDir, {
+        dotfiles: "ignore",
+        index: false,
+        maxAge: "1d",
+        setHeaders(res) {
+            res.setHeader("Access-Control-Allow-Origin", APP_URL);
+        },
+    })
+);
 
 app.use(
     "/api/stripe/webhook",
