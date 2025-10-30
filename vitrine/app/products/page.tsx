@@ -56,7 +56,7 @@ export default async function Catalog() {
                                     <strong>{p.name}</strong>
                                     {p?.metadata?.description ? <div style={{ color: '#666' }}>{p.metadata.description}</div> : null}
                                 </div>
-                                <Link href={`/products/${p._id}`}><button>Voir</button></Link>
+                                <Link href={`/product/${p._id}`}><button>Voir</button></Link>
                             </div>
                         </li>
                     ))}
