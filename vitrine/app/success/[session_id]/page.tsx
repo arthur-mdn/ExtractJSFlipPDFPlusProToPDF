@@ -78,7 +78,8 @@ export default function Success() {
     if (state.err) return <p style={{ color: 'crimson' }}>{state.err}</p>;
     console.log(state)
     return (
-        <div>
+        <main>
+            <img src={"/confetti.webp"} style={{width:'150px'}}/>
             <h2>Merci !</h2>
             {state.productName && (
                 <p>
@@ -90,18 +91,19 @@ export default function Success() {
                 </p>
             )}
             <p>Votre clé de licence :</p>
-            <code
-                style={{
-                    fontSize: 18,
-                    padding: 8,
-                    display: 'inline-block',
-                    background: '#f4f4f4',
-                    borderRadius: 6,
-                }}
-            >
-                {state.licenseKey ?? '(aucune)'}
-            </code>
-            <div style={{ marginTop: 12 }}>
+            <div className={"fc g1"}>
+                <code
+                    style={{
+                        fontSize: 18,
+                        padding: 8,
+                        display: 'inline-block',
+                        background: '#f4f4f4',
+                        borderRadius: 6,
+                    }}
+                >
+                    {state.licenseKey ?? '(aucune)'}
+                </code>
+
                 <button
                     onClick={() => {
                         const text = state.licenseKey || '';
@@ -111,8 +113,11 @@ export default function Success() {
                     Copier la clé
                 </button>
             </div>
+            <div style={{ marginTop: 12 }}>
+
+            </div>
             {state.email ? <p style={{ marginTop: 8 }}>Envoyée à : {state.email}</p> : null}
             <p style={{ marginTop: 12 }}>Dans l’extension, collez cette clé puis cliquez sur “Activer”.</p>
-        </div>
+        </main>
     );
 }
