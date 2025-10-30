@@ -1,20 +1,48 @@
 [
   {
     "_id": "extract_js_flipbook_to_pdf",
-    "name": "Extract JS FlipBook to PDF (lifetime)",
+    "name": "Extract JS FlipBook to PDF",
     "stripePriceId": "price_1SLMyxJAnYGuyFY2kmRgAVUg",
     "maxActivationsDefault": 1,
     "active": true,
     "metadata": {
       "version": "1.0.0",
       "icon": "extract_js_flipbook_to_pdf.png",
-      "description": "Use this tool to convert JS FlipBooks into PDF format.",
-      "tags": ["conversion", "pdf", "flipbook" ],
-      "features": [
-        "Convert JS FlipBooks to high-quality PDF files",
-        "Preserve original layout and design",
-        "User-friendly interface for easy conversion"
-      ]
+      "shortDescription": {
+        "fr": "Exportez facilement des flipbooks JavaScript en PDF de haute qualité.",
+        "en": "Easily export JavaScript flipbooks to high-quality PDFs."
+      },
+      "description": {
+        "fr": "Cette extension permet d’exporter facilement un flipbook JavaScript en PDF. Elle détecte automatiquement le flipbook présent dans l’onglet ouvert, charge chaque page une à une, puis assemble le tout dans un fichier PDF téléchargeable.\nTu obtiens ainsi une version complète et lisible du flipbook, que tu peux conserver ou partager sans dépendre du site d’origine.",
+        "en": "This extension allows you to easily export a JavaScript flipbook to PDF. It automatically detects the flipbook present in the open tab, loads each page one by one, and then assembles everything into a downloadable PDF file.\nYou thus obtain a complete and readable version of the flipbook, which you can keep or share without relying on the original site."
+      },
+      "tags": {
+        "en" : [
+          "conversion",
+          "pdf",
+          "flipbook",
+          "productivity",
+          "tools"
+        ],
+        "fr" : [
+          "conversion",
+          "pdf",
+          "flipbook",
+          "productivité",
+          "outils"
+        ]
+      },
+      "langsupported": [
+        "fr",
+        "en"
+      ],
+      "downloadUrl": "https://github.com/arthur-mdn/extract_js_flipbook_to_pdf",
+      "developer": "Eradion",
+      "releaseDate": "2025-10-28",
+      "lastUpdated": "2025-10-28",
+      "userReviews": [],
+      "relatedProducts": [],
+      "faq": []
     },
     "createdAt": "2025-10-28T00:00:00.000Z"
   }

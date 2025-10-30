@@ -43,7 +43,7 @@ section, article{
 }
 
 h1 {
-    font-size: 2.8rem;
+    font-size: 2rem;
     line-height: 1.1;
 }
 
@@ -53,13 +53,13 @@ button , .button{
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 8px;
+    border-radius: 80px;
     border: 1px solid transparent;
-    padding: 0.6em 1.2em;
+    padding: 0.4em 1em;
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
-    background-color: #1a1a1a;
+    background-color: #EA3F5D;
     cursor: pointer;
     transition: all 0.25s;
 }
@@ -173,6 +173,9 @@ textarea{
 .c-primary{
     color: #008334;
 }
+.c-t-sec{
+    color: #757575;
+}
 .fw-w{
     flex-wrap: wrap;
 }
@@ -183,16 +186,28 @@ textarea{
     font-weight: normal;
 }
 
+hr{
+    border: none;
+    border-top: 1px solid #e2e2e2;
+    margin: 1rem 0 0;
+}
+
 main {
     padding: 2rem;
-    max-width: 1700px;
+    max-width: 1200px;
     margin: 0 auto;
+}
 
+.box{
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    padding: 1.2rem;
+    background-color: white;
 }
 
 .product-image {
     position: relative;
-    width: 200px;
+    width: 170px;
     aspect-ratio: 1 / 1;
 }
 
@@ -224,6 +239,6 @@ main {
     mask-repeat: no-repeat;
     -webkit-mask-position: center;
     mask-position: center;
-    transform: scale(1.03);
+    transform: scale(1.015);
     z-index: -1;
 }
