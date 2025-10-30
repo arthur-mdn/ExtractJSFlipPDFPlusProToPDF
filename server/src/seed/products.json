@@ -1,5 +1,51 @@
 [
   {
+    "_id": "cookie_remover",
+    "name": "Cookie Remover",
+    "stripePriceId": null,
+    "active": true,
+    "metadata": {
+      "version": "1.0.0",
+      "icon": "cookie_remover.png",
+      "shortDescription": {
+        "fr": "Cette extension permet de cacher les bannières et pop-ups de cookies qui s’affichent sur la plupart des sites.",
+        "en": "This extension hides cookie banners and pop-ups that appear on most websites."
+      },
+      "description": {
+        "fr": "Cette extension permet de cacher les bannières et pop-ups de cookies qui s’affichent sur la plupart des sites. Elle ne les accepte pas, elle les masque simplement, pour que tu puisses naviguer sans interruption et sans être suivi.\n",
+        "en": "This extension hides cookie banners and pop-ups that appear on most websites. It doesn't accept them; it simply hides them so you can browse without interruptions and without being tracked.\n"
+      },
+      "tags": {
+        "en" : [
+          "extension",
+          "cookie",
+          "adblock",
+          "consent",
+          "cookie removal"
+        ],
+        "fr" : [
+          "extension",
+          "cookie",
+          "adblock",
+          "consentement",
+          "suppression de cookies"
+        ]
+      },
+      "langsupported": [
+        "fr",
+        "en"
+      ],
+      "downloadUrl": "https://github.com/arthur-mdn/cookie-remover",
+      "developer": "Eradion",
+      "releaseDate": "2025-10-28",
+      "lastUpdated": "2025-10-28",
+      "userReviews": [],
+      "relatedProducts": [],
+      "faq": []
+    },
+    "createdAt": "2025-10-28T00:00:00.000Z"
+  },
+  {
     "_id": "extract_js_flipbook_to_pdf",
     "name": "Extract JS FlipBook to PDF",
     "stripePriceId": "price_1SLMyxJAnYGuyFY2kmRgAVUg",
@@ -36,7 +82,7 @@
         "fr",
         "en"
       ],
-      "downloadUrl": "https://github.com/arthur-mdn/extract_js_flipbook_to_pdf",
+      "downloadUrl": "https://github.com/arthur-mdn/ExtractJSFlipPDFPlusProToPDF",
       "developer": "Eradion",
       "releaseDate": "2025-10-28",
       "lastUpdated": "2025-10-28",

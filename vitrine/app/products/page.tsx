@@ -48,19 +48,19 @@ export default async function Catalog() {
         return (
             <main>
                 <h2>Produits</h2>
-                <ul style={{ listStyle: 'none', padding: 0 }}>
+                <div className={"fc g1"}>
                     {products.map((p) => (
-                        <li key={p._id} style={{ margin: 12, padding: 12, border: '1px solid #ddd', borderRadius: 8 }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Link href={`/product/${p._id}`} className="fr g1 ai-c" style={{ textDecoration: 'none', color: 'inherit' }} key={p._id}>
+                                <div className="product-image" style={{ width: '100px' }} >
+                                    <img src={`${process.env.NEXT_PUBLIC_API_URL}/images/${p._id}.png`} />
+                                </div>
                                 <div>
                                     <strong>{p.name}</strong>
-                                    {p?.metadata?.description ? <div style={{ color: '#666' }}>{p.metadata.description}</div> : null}
+                                    {p?.metadata?.shortDescription.fr ? <div style={{ color: '#666' }}>{p.metadata.shortDescription.fr}</div> : null}
                                 </div>
-                                <Link href={`/product/${p._id}`}><button>Voir</button></Link>
-                            </div>
-                        </li>
+                            </Link>
                     ))}
-                </ul>
+                </div>
             </main>
         );
     } catch (e) {

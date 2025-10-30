@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import BuyButton from "@/components/BuyButton";
 import feather from 'feather-icons';
 import { Download } from 'react-feather';
@@ -31,7 +32,7 @@ export default async function ProductPage({ params }: Props) {
         }
         const product: Product = await res.json();
 
-        console.log(product)
+        console.log(product.metadata.downloadUrl);
 
         return (
             <main className={"product-page fc g2"}>
@@ -44,10 +45,13 @@ export default async function ProductPage({ params }: Props) {
                         <h1>{product.name}</h1>
                         <p>{product.metadata.shortDescription.fr}</p>
                         <p className={"c-t-sec"}>{product.metadata.version}</p>
-                        <button style={{width:'fit-content'}}>
-                            <Download size={16} />
-                            Télécharger l'extension
-                        </button>
+                        <Link href={product.metadata.downloadUrl ? product.metadata.downloadUrl : '#'} target={"_blank"} rel={"noopener noreferrer"}>
+                            <button style={{width:'fit-content'}}>
+                                <Download size={16} />
+                                Télécharger l'extension
+                            </button>
+                        </Link>
+
                     </div>
                 </div>
 
@@ -59,7 +63,7 @@ export default async function ProductPage({ params }: Props) {
                 </div>
 
                 {
-                    product.prices && product.prices.length > 0 ? (
+                    product.prices && product.prices.length > 0 && (
                         <div className={"fc g0-5"}>
                             <h2>Tarifs</h2>
                             <div className={"fr g0-5 fw-w"}>
@@ -78,8 +82,7 @@ export default async function ProductPage({ params }: Props) {
                                 }
                             </div>
                         </div>
-                    ) :
-                        <div>Aucun tarif disponible</div>
+                    )
                 }
             </main>
         );
