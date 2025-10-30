@@ -62,7 +62,8 @@ export default function Success() {
                     loading: false,
                     licenseKey: data?.licenseKey,
                     email: data?.email ?? null,
-                    productName: data?.product?.name ?? null,
+                    productName: data?.product?.name ,
+                    price: data?.priceSnapshot ?? null
                 });
             } catch (err: any) {
                 console.error('[success] network error:', err);
@@ -75,13 +76,17 @@ export default function Success() {
 
     if (state.loading) return <p>Chargement…</p>;
     if (state.err) return <p style={{ color: 'crimson' }}>{state.err}</p>;
-
+    console.log(state)
     return (
         <div>
             <h2>Merci !</h2>
             {state.productName && (
                 <p>
                     Produit : <strong>{state.productName}</strong>
+                </p>
+            )}
+            {state.price && (
+                <p>Prix payé : <strong>{state.price.unitAmount} €</strong>
                 </p>
             )}
             <p>Votre clé de licence :</p>

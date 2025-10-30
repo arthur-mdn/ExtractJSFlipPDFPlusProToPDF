@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Licenses, Products } from "../db.js";
+import { Licenses, Products, Prices } from "../db.js";
 import { authJwt, signToken } from "../utils/auth.js";
 
 const router = Router();
@@ -16,6 +16,7 @@ router.get("/by-session/:sessionId", async (req, res) => {
         licenseKey: lic._id,
         email: lic.email || null,
         product: product ? { id: product._id, name: product.name } : null,
+        priceSnapshot: lic.priceSnapshot || null,
     });
 });
 

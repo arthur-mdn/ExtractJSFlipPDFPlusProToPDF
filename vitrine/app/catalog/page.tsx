@@ -54,7 +54,7 @@ export default async function Catalog() {
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <div>
                                     <strong>{p.name}</strong>
-                                    {p.description ? <div style={{ color: '#666' }}>{p.description}</div> : null}
+                                    {p?.metadata?.description ? <div style={{ color: '#666' }}>{p.metadata.description}</div> : null}
                                 </div>
                                 <Link href={`/products/${p._id}`}><button>Voir</button></Link>
                             </div>

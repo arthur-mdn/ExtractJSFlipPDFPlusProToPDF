@@ -1,8 +1,8 @@
 import { Router } from "express";
 import Stripe from "stripe";
 import crypto from "node:crypto";
-import { Licenses, Products } from "../db.js";
-import type { License } from "../models/License.js";
+import { Licenses, Products, Prices } from "../db.js";
+import type { License, PriceSnapshot } from "../models/License.js";
 
 const router = Router();
 
@@ -23,6 +23,8 @@ export default function webhookRoutes(stripe: Stripe, webhookSecret: string) {
                 case "checkout.session.completed": {
                     const session = event.data.object as Stripe.Checkout.Session;
                     const productId = (session.metadata?.productId as string) || null;
+                    const priceId = (session.metadata?.priceId as string) || null;
+
                     if (!productId) {
                         console.error("Missing productId in checkout session metadata");
                         break;
@@ -34,15 +36,33 @@ export default function webhookRoutes(stripe: Stripe, webhookSecret: string) {
                         break;
                     }
 
+                    let priceSnapshot: PriceSnapshot | null = null;
+                    if (priceId) {
+                        const priceDoc = await Prices.findOne({ _id: priceId, active: true });
+                        if (priceDoc) {
+                            priceSnapshot = {
+                                _id: priceDoc._id,
+                                unitAmount: priceDoc.unitAmount ?? null,
+                                currency: priceDoc.currency ?? null,
+                                recurring: priceDoc.recurring ?? null,
+                                metadata: priceDoc.metadata ?? {}
+                            };
+                        } else {
+                            console.warn("Price referenced in session not found or inactive:", priceId);
+                        }
+                    }
+
                     const licenseId = crypto.randomUUID();
                     const doc: License = {
                         _id: licenseId,
                         productId,
+                        priceId: priceId ?? null,
+                        priceSnapshot,
                         email: (session.customer_details?.email as string) || null,
                         stripePaymentIntentId: (session.payment_intent as string) || null,
                         stripeCheckoutSessionId: session.id,
                         status: "active",
-                        maxActivations: product.maxActivationsDefault,
+                        maxActivations: product.maxActivationsDefault ?? 1,
                         activations: [],
                         createdAt: new Date(),
                     };

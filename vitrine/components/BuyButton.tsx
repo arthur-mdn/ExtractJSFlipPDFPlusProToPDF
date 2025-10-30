@@ -1,18 +1,22 @@
 'use client';
 import React, { useState } from 'react';
 
-export default function BuyButton({ productId, disabled }: { productId: string; disabled?: boolean }) {
+export default function BuyButton({ priceId, disabled }: { priceId?: string; disabled?: boolean; }) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     async function handleCheckout() {
         setError(null);
+        if (!priceId) {
+            setError('Aucun priceId fourni');
+            return;
+        }
         setLoading(true);
         try {
             const res = await fetch('/api/checkout', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ productId }),
+                body: JSON.stringify({ priceId }),
             });
 
             const data = await res.json();

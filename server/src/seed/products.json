@@ -5,7 +5,17 @@
     "stripePriceId": "price_1SLMyxJAnYGuyFY2kmRgAVUg",
     "maxActivationsDefault": 1,
     "active": true,
-    "metadata": {},
+    "metadata": {
+      "version": "1.0.0",
+      "icon": "extract_js_flipbook_to_pdf.png",
+      "description": "Use this tool to convert JS FlipBooks into PDF format.",
+      "tags": ["conversion", "pdf", "flipbook" ],
+      "features": [
+        "Convert JS FlipBooks to high-quality PDF files",
+        "Preserve original layout and design",
+        "User-friendly interface for easy conversion"
+      ]
+    },
     "createdAt": "2025-10-28T00:00:00.000Z"
   }
 ]

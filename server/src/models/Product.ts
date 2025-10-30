@@ -1,10 +1,7 @@
-// src/models/Product.ts
-import { Collection, MongoClient } from "mongodb";
-
 export type Product = {
     _id: string;
     name: string;
-    stripePriceId: string;
+    stripeProductId?: string;
     maxActivationsDefault: number;
     active: boolean;
     metadata?: Record<string, any>;
