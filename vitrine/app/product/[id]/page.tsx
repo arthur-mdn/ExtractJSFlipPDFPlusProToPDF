@@ -45,7 +45,7 @@ export default async function ProductPage({ params }: Props) {
                         <h1>{product.name}</h1>
                         <p>{product.metadata.shortDescription.fr}</p>
                         <p className={"c-t-sec"}>{product.metadata.version}</p>
-                        <Link href={product.metadata.downloadUrl ? product.metadata.downloadUrl : '#'} target={"_blank"} rel={"noopener noreferrer"}>
+                        <Link href={product.metadata.downloadUrl ? product.metadata.downloadUrl : '#'} target={"_blank"} rel={"noopener noreferrer"} style={{width:'fit-content'}}>
                             <button style={{width:'fit-content'}}>
                                 <Download size={16} />
                                 Télécharger l'extension
